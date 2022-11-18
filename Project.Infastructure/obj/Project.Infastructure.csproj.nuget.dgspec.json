@@ -1,0 +1,253 @@
+{
+  "format": 1,
+  "restore": {
+    "T:\\BTL CN Web\\DomitoryManagerment\\Project.Infastructure\\Project.Infastructure.csproj": {}
+  },
+  "projects": {
+    "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\App.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\App.Shared.csproj",
+        "projectName": "App.Shared",
+        "projectPath": "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\App.Shared.csproj",
+        "packagesPath": "C:\\Users\\toanq\\.nuget\\packages\\",
+        "outputPath": "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\toanq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Abp": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Abp.AutoMapper": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Abp.EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Abp.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Castle.Core": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.2.2, )"
+            },
+            "MassTransit": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "MassTransit.AspNetCore": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "MassTransit.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.17.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\Project.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\Project.Domain.csproj",
+        "projectName": "Project.Domain",
+        "projectPath": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\Project.Domain.csproj",
+        "packagesPath": "C:\\Users\\toanq\\.nuget\\packages\\",
+        "outputPath": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\toanq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\App.Shared.csproj": {
+                "projectPath": "T:\\BTL CN Web\\DomitoryManagerment\\App.Shared\\App.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "T:\\BTL CN Web\\DomitoryManagerment\\Project.Infastructure\\Project.Infastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Infastructure\\Project.Infastructure.csproj",
+        "projectName": "Project.Infastructure",
+        "projectPath": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Infastructure\\Project.Infastructure.csproj",
+        "packagesPath": "C:\\Users\\toanq\\.nuget\\packages\\",
+        "outputPath": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Infastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\toanq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\Project.Domain.csproj": {
+                "projectPath": "T:\\BTL CN Web\\DomitoryManagerment\\Project.Domain\\Project.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

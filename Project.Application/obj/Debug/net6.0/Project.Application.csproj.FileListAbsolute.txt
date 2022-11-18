@@ -1,0 +1,12 @@
+T:\BTL CN Web\Business\Project.Application\bin\Debug\net6.0\Project.Application.deps.json
+T:\BTL CN Web\Business\Project.Application\bin\Debug\net6.0\Project.Application.dll
+T:\BTL CN Web\Business\Project.Application\bin\Debug\net6.0\Project.Application.pdb
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.csproj.AssemblyReference.cache
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.GeneratedMSBuildEditorConfig.editorconfig
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.AssemblyInfoInputs.cache
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.AssemblyInfo.cs
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.csproj.CoreCompileInputs.cache
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.dll
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\refint\Project.Application.dll
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\Project.Application.pdb
+T:\BTL CN Web\Business\Project.Application\obj\Debug\net6.0\ref\Project.Application.dll
