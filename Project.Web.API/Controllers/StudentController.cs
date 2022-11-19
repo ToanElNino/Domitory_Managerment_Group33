@@ -88,7 +88,7 @@ namespace Project.Controllers
                 return false;
             }
         }
-        [HttpDelete("DeleteVoucher")]
+        [HttpDelete("DeleteStudent")]
         public async Task<bool> DeleteAsync(long id)
         {
             try
@@ -106,5 +106,6 @@ namespace Project.Controllers
 
 
     #endregion
+
 
 }
