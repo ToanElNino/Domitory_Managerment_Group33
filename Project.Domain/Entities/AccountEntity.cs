@@ -14,6 +14,6 @@ namespace Project.Domain.Entity
         public long RoleID { get; set; }
         public long UserID { get; set; }
         [StringLength(20)]
-        public string RoleName { get; set; }
+        public string Role { get; set; }
     }
 }

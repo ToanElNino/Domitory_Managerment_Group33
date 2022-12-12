@@ -13,7 +13,7 @@ namespace Project.Controllers
     [Route("api/services/app/[controller]")]
     [ApiController]
 
-    #region Student
+    #region Student  
     public class StudentController : ControllerBase
     {
         private readonly IMediator _mediator;

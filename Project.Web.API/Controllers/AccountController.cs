@@ -6,6 +6,11 @@ using Project.Domain.Dto;
 using Project.Domain.Infastructure;
 using System.Data.Entity;
 using App.Shared.Uow;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Project.Controllers
@@ -20,22 +25,24 @@ namespace Project.Controllers
         private readonly IMapper _mapper;
         private readonly IAccountRepository _accountRepository;
         private readonly IMaxUnitOfWork _unitOfWork;
-
+        private IConfiguration _config;
         public AccountController(
            IMediator mediator,
            IMapper mapper,
            IAccountRepository accountRepository,
-           IMaxUnitOfWork unitOfWork
+           IMaxUnitOfWork unitOfWork,
+           IConfiguration config
             )
         {
             _mediator = mediator;
             _mapper = mapper;
             _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
-
+            _config = config;
         }
-        [HttpGet("Login")]
-        public async Task<List<AccountEntity>> GetAccount([FromQuery] GetAccountDto input)
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public  IActionResult Login([FromBody] GetAccountDto input)
         {
             var res = new List<AccountEntity>();
             try
@@ -48,7 +55,7 @@ namespace Project.Controllers
                                  Password = obj.Password,  
                                  IsActive = obj.IsActive,
                                  RoleID = obj.RoleID,
-                                 RoleName = obj.RoleName,
+                                 Role = obj.Role,
                                  UserID = obj.UserID,
                                  CreationTime = obj.CreationTime,
                                  CreatorUserId = obj.CreatorUserId,
@@ -60,13 +67,44 @@ namespace Project.Controllers
                              })
                         .Where(u => u.UserName == input.UserName && u.Password == input.Password);
                 res = query.ToList();
-                return res;
+                if(res!= null && res.Count == 1)
+                {
+                    var account = res[0];
+                    var token = GenerateToken(account);
+                    return Ok(token);
+                }
+                return NotFound("user not found");
             }
             catch (Exception ex)
             {
-                return null;
+                return NotFound("user not found");
             }
         }
+
+        private string GenerateToken(AccountEntity account)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, account.UserName),
+                //new Claim(ClaimTypes.Email, account.E),
+                //new Claim(ClaimTypes.GivenName, user.GivenName),
+                //new Claim(ClaimTypes.Surname, user.Surname),
+                new Claim(ClaimTypes.Role, account.Role)
+            };
+
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["Jwt:Audience"],
+              claims,
+              expires: DateTime.Now.AddMinutes(15),
+              signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
         [HttpPost("Register")]
         public async Task<bool> PostAsync([FromBody] CreateAccountDto input)
         {
