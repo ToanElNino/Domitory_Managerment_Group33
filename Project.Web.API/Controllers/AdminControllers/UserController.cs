@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace JwtApp.Controllers
+namespace Project.Web.API.Controllers.AdminControllers
 {
     [Route("api/[controller]")]
     [ApiController]
