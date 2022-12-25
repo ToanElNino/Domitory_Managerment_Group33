@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Project.Infastructure.Context.Room;
+using Project.Infastructure.Context.SVDKP;
+using Project.Infastructure.Context.SVTP;
+using Project.Infastructure.Context.Building;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,10 +23,19 @@ builder.Services.AddControllers();
 //Context
 builder.Services.AddDbContext<StudentContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AccountContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<RoomContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<SVDKPContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<SVTPContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<BuildingContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 //Repository DI
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<ISVDKPRepository, SVDKPRepository>();
+builder.Services.AddScoped<ISVTPRepository, SVTPRepository>();
+builder.Services.AddScoped<IBuildingRepository, BuildingRepository>();
+
 
 
 builder.Services.AddScoped<IMaxUnitOfWork, StudentUnitOfWork>();
