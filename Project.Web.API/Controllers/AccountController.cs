@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using App.Shared.EntityFrameworkCore.APIResponseBase;
+using Nest;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Project.Controllers
@@ -42,7 +44,7 @@ namespace Project.Controllers
         }
         [AllowAnonymous]
         [HttpPost("Login")]
-        public  IActionResult Login([FromBody] GetAccountDto input)
+        public async Task<object> Login([FromBody] GetAccountDto input)
         {
             var res = new List<AccountEntity>();
             try
@@ -58,12 +60,6 @@ namespace Project.Controllers
                                  Role = obj.Role,
                                  UserID = obj.UserID,
                                  CreationTime = obj.CreationTime,
-                                 CreatorUserId = obj.CreatorUserId,
-                                 LastModificationTime = obj.LastModificationTime,
-                                 LastModifierUserId = obj.LastModifierUserId,
-                                 IsDeleted = obj.IsDeleted,
-                                 DeleterUserId = obj.DeleterUserId,
-                                 DeletionTime = obj.DeletionTime,
                              })
                         .Where(u => u.UserName == input.UserName && u.Password == input.Password);
                 res = query.ToList();
@@ -71,13 +67,19 @@ namespace Project.Controllers
                 {
                     var account = res[0];
                     var token = GenerateToken(account);
-                    return Ok(token);
+                    var loginResult = new LoginResultDto()
+                    {
+                        Token = token,
+                        UserName = account.UserName
+                    };
+                    return DataResult.ResultSucces(loginResult, "Dang nhap Thanh Cong!");
                 }
-                return NotFound("user not found");
+                return DataResult.ResultError("user not found", "Dang nhap that bai!");
             }
             catch (Exception ex)
             {
-                return NotFound("user not found");
+                var data = DataResult.ResultError(ex.ToString(), "Loi dang nhap");
+                return data;
             }
         }
 

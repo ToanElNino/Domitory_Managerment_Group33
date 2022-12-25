@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.Domain.Entity
 {
-    public class AccountEntity : FullAuditedEntity<long>
+    public class AccountEntity : Entity<long>
     {
         [StringLength(20)]
         public string UserName { get; set; }
@@ -15,5 +15,6 @@ namespace Project.Domain.Entity
         public long UserID { get; set; }
         [StringLength(20)]
         public string Role { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
