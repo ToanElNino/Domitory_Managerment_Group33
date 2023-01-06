@@ -17,52 +17,57 @@ namespace Project.Controllers
     [Route("api/services/app/[controller]")]
     [ApiController]
 
-    #region SVDKP  
-    public class SVDKPController : ControllerBase
+    #region CanBo  
+    public class CanBoController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly ISVDKPRepository _SVDKPRepository;
+        private readonly ICanBoRepository _CanBoRepository;
+        private readonly IMaxUnitOfWork _unitOfWork;
 
-        public SVDKPController(
+        public CanBoController(
            IMediator mediator,
            IMapper mapper,
-           ISVDKPRepository SVDKPRepository
+           ICanBoRepository CanBoRepository,
+           IMaxUnitOfWork unitOfWork
             )
         {
             _mediator = mediator;
             _mapper = mapper;
-            _SVDKPRepository = SVDKPRepository;
+            _CanBoRepository = CanBoRepository;
+            _unitOfWork = unitOfWork;
 
         }
-        [HttpGet("GetSVDKP")]
-        public async Task<object> GetSVDKP([FromQuery] GetSVDKPDto input)
+        [HttpGet("GetCanBo")]
+        public async Task<object> GetCanBo([FromQuery] GetCanBoDto input)
         {
             try
             {
-                var query = (from obj in _SVDKPRepository.GetAll()
-                             select new SVDKPEntity()
+                var query = (from obj in _CanBoRepository.GetAll()
+                             select new CanBoEntity()
                              {
                                  Id = obj.Id,
-                                 MaSinhVien = obj.MaSinhVien,
-                                 MaPhong = obj.MaPhong, 
-                                 ThoiDiemDK = obj.ThoiDiemDK,   
-                                 TrangThai  = obj.TrangThai,    
-                                 ThongTinSinhVien = obj.ThongTinSinhVien,
-                                 Ky = obj.Ky
-                                
+                                 GioiTinh = obj.GioiTinh,
+                                 NgaySinh = obj.NgaySinh,
+                                 Email = obj.Email,
+                                 ChucVu=obj.ChucVu,
+                                 MaCanBo=obj.MaCanBo,
+                                 HoTen=obj.HoTen,
+                                 ImageUrl=obj.ImageUrl,
+                                 SoDienThoai=obj.SoDienThoai,
+                                 CreationTime = obj.CreationTime
                              })
                         .WhereIf(input.Id.HasValue, u => u.Id == input.Id);
                 if (query != null)
                 {
                     var res = query.ToList();
                     var totalRecs = query.Count();
-                    return DataResult.ResultSucces(res, "Get SVDKP Thanh Cong!", totalRecs);
+                    return DataResult.ResultSucces(res, "Get CanBo Thanh Cong!", totalRecs);
 
                 }
                 else
                 {
-                    var res = new List<SVDKPEntity>();
+                    var res = new List<CanBoEntity>();
                     return DataResult.ResultSucces(res, "Get success!", 0);
 
                 }
@@ -74,21 +79,23 @@ namespace Project.Controllers
                 return data;
             }
         }
-        [HttpPost("CreateOrUpdateSVDKP")]
-        public async Task<object> PostAsync([FromBody] CreateSVDKPDto input)
+        [HttpPost("CreateOrUpdateCanBo")]
+        public async Task<object> PostAsync([FromBody] CreateCanBoDto input)
         {
             try
             {
                 //Update
                 if (input.Id > 0)
                 {
-                    await _SVDKPRepository.UpdateAsync(input);
+                    await _CanBoRepository.UpdateAsync(input);
+                    _unitOfWork.SaveChange();
                     var data = DataResult.ResultSucces(input, "Insert success !");
                     return data;
                 }
                 else
                 {
-                    long id = await _SVDKPRepository.InsertAndGetIdAsync(input);
+                    long id = await _CanBoRepository.InsertAndGetIdAsync(input);
+                    _unitOfWork.SaveChange();
                     var data = DataResult.ResultSucces(id, "Insert success !");
                     return data;
                 }
@@ -99,12 +106,12 @@ namespace Project.Controllers
                 return data;
             }
         }
-        [HttpDelete("DeleteSVDKP")]
+        [HttpDelete("DeleteCanBo")]
         public async Task<object> DeleteAsync(long id)
         {
             try
             {
-                await _SVDKPRepository.DeleteAsync(id);
+                await _CanBoRepository.DeleteAsync(id);
                 return true;
             }
             catch (Exception e)

@@ -15,6 +15,7 @@ namespace Project.Domain.Entity
         public int TrangThai { get; set; }
         [StringLength(10)]
         public string Ky { get; set; }
+        public string ThongTinSinhVien { get; set; }
         public DateTime CreationTime { get; set; }
     }
 }

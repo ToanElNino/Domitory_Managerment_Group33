@@ -1,13 +1,11 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.Building;
-
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class BuildingRepository : RepositoryBase<BuildingContext, BuildingEntity, long>, IBuildingRepository
+    public class BuildingRepository : RepositoryBase<Context, BuildingEntity, long>, IBuildingRepository
     {
-        public BuildingRepository(BuildingContext BuildingContext)
+        public BuildingRepository(Context BuildingContext)
             : base(BuildingContext)
         {
 

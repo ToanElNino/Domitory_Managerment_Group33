@@ -1,14 +1,12 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.Student;
-using Project.Infastructure.Context.Account;
 
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class AccountRepository : RepositoryBase<AccountContext, AccountEntity, long>, IAccountRepository
+    public class AccountRepository : RepositoryBase<Context, AccountEntity, long>, IAccountRepository
     {
-        public AccountRepository(AccountContext accountContext)
+        public AccountRepository(Context accountContext)
             : base(accountContext)
         {
 

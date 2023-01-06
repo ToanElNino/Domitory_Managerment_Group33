@@ -1,13 +1,12 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.SVDKP;
 
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class SVDKPRepository : RepositoryBase<SVDKPContext, SVDKPEntity, long>, ISVDKPRepository
+    public class SVDKPRepository : RepositoryBase<Context, SVDKPEntity, long>, ISVDKPRepository
     {
-        public SVDKPRepository(SVDKPContext SVDKPContext)
+        public SVDKPRepository(Context SVDKPContext)
             : base(SVDKPContext)
         {
 

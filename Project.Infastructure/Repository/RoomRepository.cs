@@ -1,13 +1,12 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.Room;
 
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class RoomRepository : RepositoryBase<RoomContext, RoomEntity, long>, IRoomRepository
+    public class RoomRepository : RepositoryBase<Context, RoomEntity, long>, IRoomRepository
     {
-        public RoomRepository(RoomContext RoomContext)
+        public RoomRepository(Context RoomContext)
             : base(RoomContext)
         {
 

@@ -1,13 +1,13 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.Student;
+using Project.Infastructure;
 
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class StudentRepository : RepositoryBase<StudentContext, StudentEntity, long>, IStudentRepository
+    public class StudentRepository : RepositoryBase<Context, StudentEntity, long>, IStudentRepository
     {
-        public StudentRepository(StudentContext studentContext)
+        public StudentRepository(Context studentContext)
             : base(studentContext)
         {
 

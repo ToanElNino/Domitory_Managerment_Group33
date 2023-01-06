@@ -1,18 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Project.Domain.Infastructure;
-using Project.Infastructure.Repositories;
 using MediatR;
 using App.Shared.Uow;
-using Project.Infastructure.Context.Student;
-using Project.Infastructure.Context.Account;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using Project.Infastructure.Context.Room;
-using Project.Infastructure.Context.SVDKP;
-using Project.Infastructure.Context.SVTP;
-using Project.Infastructure.Context.Building;
+using Project.Infastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +15,7 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //Context
-builder.Services.AddDbContext<StudentContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<AccountContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<RoomContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<SVDKPContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<SVTPContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<BuildingContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<Context>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 //Repository DI
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
@@ -35,11 +24,13 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ISVDKPRepository, SVDKPRepository>();
 builder.Services.AddScoped<ISVTPRepository, SVTPRepository>();
 builder.Services.AddScoped<IBuildingRepository, BuildingRepository>();
+builder.Services.AddScoped<ICanBoRepository, CanBoRepository>();
 
 
 
-builder.Services.AddScoped<IMaxUnitOfWork, StudentUnitOfWork>();
-builder.Services.AddScoped<IMaxUnitOfWork, AccountUnitOfWork>();
+
+//builder.Services.AddScoped<IMaxUnitOfWork, StudentUnitOfWork>();
+builder.Services.AddScoped<IMaxUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -47,7 +38,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
+{
+    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("https://api.cloudinary.com/v1_1/project2cloud/upload").AllowAnyMethod().AllowAnyHeader();
+}));
 //authen
 
 builder.Services.AddAuthentication(options =>
@@ -109,7 +104,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeMaze_AzureSQL v1"));
 }
 app.UseHttpsRedirection();
-
+app.UseCors("corspolicy");
 app.UseRouting();
 
 app.UseAuthentication();

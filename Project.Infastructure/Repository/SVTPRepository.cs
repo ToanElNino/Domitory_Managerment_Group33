@@ -1,13 +1,12 @@
 ﻿using App.Shared.Repositories;
 using Project.Domain.Infastructure;
 using Project.Domain.Entity;
-using Project.Infastructure.Context.SVTP;
 
-namespace Project.Infastructure.Repositories
+namespace Project.Infastructure.Context
 {
-    public class SVTPRepository : RepositoryBase<SVTPContext, SVTPEntity, long>, ISVTPRepository
+    public class SVTPRepository : RepositoryBase<Context, SVTPEntity, long>, ISVTPRepository
     {
-        public SVTPRepository(SVTPContext SVTPContext)
+        public SVTPRepository(Context SVTPContext)
             : base(SVTPContext)
         {
 

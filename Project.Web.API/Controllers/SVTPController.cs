@@ -48,7 +48,6 @@ namespace Project.Controllers
                                  MaPhong = obj.MaPhong,
                                  Ky = obj.Ky,
                                  CreationTime = obj.CreationTime
-
                              })
                         .WhereIf(input.Id.HasValue, u => u.Id == input.Id);
                 if (query != null)
