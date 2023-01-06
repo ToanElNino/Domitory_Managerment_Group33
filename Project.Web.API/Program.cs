@@ -40,7 +40,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
-    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     build.WithOrigins("https://api.cloudinary.com/v1_1/project2cloud/upload").AllowAnyMethod().AllowAnyHeader();
 }));
 //authen
