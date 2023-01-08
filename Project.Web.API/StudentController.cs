@@ -12,57 +12,66 @@ using Microsoft.Extensions.Logging;
 using Nest;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Project.Controllers
+namespace Project.Web.API
 {
     [Route("api/services/app/[controller]")]
     [ApiController]
 
-    #region SVDKP  
-    public class SVDKPController : ControllerBase
+    #region Student  
+    public class StudentController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly ISVDKPRepository _SVDKPRepository;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IMaxUnitOfWork _unitOfWork;
 
-        public SVDKPController(
+        public StudentController(
            IMediator mediator,
            IMapper mapper,
-           ISVDKPRepository SVDKPRepository
+           IStudentRepository studentRepository,
+           IMaxUnitOfWork unitOfWork
             )
         {
             _mediator = mediator;
             _mapper = mapper;
-            _SVDKPRepository = SVDKPRepository;
+            _studentRepository = studentRepository;
+            _unitOfWork = unitOfWork;
 
         }
-        [HttpGet("GetSVDKP")]
-        public async Task<object> GetSVDKP([FromQuery] GetSVDKPDto input)
+        [HttpGet("GetStudent")]
+        public async Task<object> GetStudent([FromQuery] GetStudentDto input)
         {
             try
             {
-                var query = (from obj in _SVDKPRepository.GetAll()
-                             select new SVDKPEntity()
+                var query = (from obj in _studentRepository.GetAll()
+                             select new StudentEntity()
                              {
                                  Id = obj.Id,
                                  MaSinhVien = obj.MaSinhVien,
-                                 MaPhong = obj.MaPhong, 
-                                 ThoiDiemDK = obj.ThoiDiemDK,   
-                                 TrangThai  = obj.TrangThai,    
-                                 ThongTinSinhVien = obj.ThongTinSinhVien,
-                                 Ky = obj.Ky
-                                
+                                 HoTen = obj.HoTen,
+                                 SoDienthoai = obj.SoDienthoai,
+                                 GioiTinh = obj.GioiTinh,
+                                 NgaySinh = obj.NgaySinh,
+                                 Email = obj.Email,
+                                 Khoa = obj.Khoa,
+                                 Vien = obj.Vien,
+                                 Lop = obj.Lop,
+                                 HoTenCha = obj.HoTenCha,
+                                 HoTenMe = obj.HoTenMe,
+                                 NoiThuongTru = obj.NoiThuongTru,
+                                 CreationTime = obj.CreationTime
                              })
                         .WhereIf(input.Id.HasValue, u => u.Id == input.Id);
                 if (query != null)
                 {
                     var res = query.ToList();
                     var totalRecs = query.Count();
-                    return DataResult.ResultSucces(res, "Get SVDKP Thanh Cong!", totalRecs);
+                    return DataResult.ResultSucces(res, "Get Student Thanh Cong!", totalRecs);
 
                 }
                 else
                 {
-                    var res = new List<SVDKPEntity>();
+                    var res = new List<StudentEntity>();
                     return DataResult.ResultSucces(res, "Get success!", 0);
 
                 }
@@ -74,21 +83,23 @@ namespace Project.Controllers
                 return data;
             }
         }
-        [HttpPost("CreateOrUpdateSVDKP")]
-        public async Task<object> PostAsync([FromBody] CreateSVDKPDto input)
+        [HttpPost("CreateOrUpdateStudent")]
+        public async Task<object> PostAsync([FromBody] CreateStudentDto input)
         {
             try
             {
                 //Update
                 if (input.Id > 0)
                 {
-                    await _SVDKPRepository.UpdateAsync(input);
+                    await _studentRepository.UpdateAsync(input);
+                    _unitOfWork.SaveChange();
                     var data = DataResult.ResultSucces(input, "Insert success !");
                     return data;
                 }
                 else
                 {
-                    long id = await _SVDKPRepository.InsertAndGetIdAsync(input);
+                    long id = await _studentRepository.InsertAndGetIdAsync(input);
+                    _unitOfWork.SaveChange();
                     var data = DataResult.ResultSucces(id, "Insert success !");
                     return data;
                 }
@@ -99,12 +110,12 @@ namespace Project.Controllers
                 return data;
             }
         }
-        [HttpDelete("DeleteSVDKP")]
+        [HttpDelete("DeleteStudent")]
         public async Task<object> DeleteAsync(long id)
         {
             try
             {
-                await _SVDKPRepository.DeleteAsync(id);
+                await _studentRepository.DeleteAsync(id);
                 return true;
             }
             catch (Exception e)

@@ -5,19 +5,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project.Domain.Dto
 {
-    public class BuildingDto : BuildingEntity
+    public class StudentDto : StudentEntity
     {
         //public IEnumerable<Rate> Rates { get; set; }
         //public IEnumerable<Items> Items { get; set; }
         // custome
     }
-    public class GetBuildingDto
+    public class GetStudentDto
     {
         public long? Id { get; set; }
-        //public long? BuildingId { get; set; }
+        //public long? RoomId { get; set; }
     }
 
-    public class CreateBuildingDto : BuildingEntity
+    public class CreateStudentDto : StudentEntity
     {
     }
 }
