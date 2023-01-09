@@ -14,6 +14,7 @@ namespace Project.Domain.Dto
     public class GetStudentDto
     {
         public long? Id { get; set; }
+        public string? MaSinhVien { get; set; }
         //public long? RoomId { get; set; }
     }
 

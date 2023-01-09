@@ -50,14 +50,15 @@ namespace Project.Controllers
                                  GioiTinh = obj.GioiTinh,
                                  NgaySinh = obj.NgaySinh,
                                  Email = obj.Email,
-                                 ChucVu=obj.ChucVu,
-                                 MaCanBo=obj.MaCanBo,
-                                 HoTen=obj.HoTen,
-                                 ImageUrl=obj.ImageUrl,
-                                 SoDienThoai=obj.SoDienThoai,
+                                 ChucVu = obj.ChucVu,
+                                 MaCanBo = obj.MaCanBo,
+                                 HoTen = obj.HoTen,
+                                 ImageUrl = obj.ImageUrl,
+                                 SoDienThoai = obj.SoDienThoai,
                                  CreationTime = obj.CreationTime
                              })
-                        .WhereIf(input.Id.HasValue, u => u.Id == input.Id);
+                        .WhereIf(input.Id.HasValue, u => u.Id == input.Id).
+                                        WhereIf(input.MaCanBo!=null, u => u.MaCanBo == input.MaCanBo);
                 if (query != null)
                 {
                     var res = query.ToList();

@@ -61,7 +61,9 @@ namespace Project.Controllers
                                 NoiThuongTru = obj.NoiThuongTru,
                                 CreationTime = obj.CreationTime
                              })
-                        .WhereIf(input.Id.HasValue,u => u.Id == input.Id);
+                        .WhereIf(input.Id.HasValue,u => u.Id == input.Id)
+                        .WhereIf(input.MaSinhVien!=null, u => u.MaSinhVien == input.MaSinhVien);
+
                 if (query != null)
                 {
                     var res = query.ToList();

@@ -54,7 +54,9 @@ namespace Project.Controllers
                                  ToaId = obj.ToaId,
                                  CreationTime = obj.CreationTime,
                              })
-                        .WhereIf(input.Id.HasValue, u => u.Id == input.Id);
+                        .WhereIf(input.Id.HasValue, u => u.Id == input.Id)
+                        .WhereIf(input.MaPhong!=null, u => u.MaPhong == input.MaPhong);
+
                 if (query != null)
                 {
                     var res = query.ToList();

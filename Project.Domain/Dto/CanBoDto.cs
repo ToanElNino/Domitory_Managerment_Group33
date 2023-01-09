@@ -14,6 +14,7 @@ namespace Project.Domain.Dto
     public class GetCanBoDto
     {
         public long? Id { get; set; }
+        public string? MaCanBo { get; set; }
         //public long? RoomId { get; set; }
     }
 

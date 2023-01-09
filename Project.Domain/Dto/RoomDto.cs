@@ -14,6 +14,7 @@ namespace Project.Domain.Dto
     public class GetRoomDto
     {
         public long? Id { get; set; }
+        public string? MaPhong { get;set; }
         //public long? RoomId { get; set; }
     }
 
