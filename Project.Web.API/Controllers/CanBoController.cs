@@ -58,7 +58,7 @@ namespace Project.Controllers
                                  CreationTime = obj.CreationTime
                              })
                         .WhereIf(input.Id.HasValue, u => u.Id == input.Id).
-                                        WhereIf(input.MaCanBo!=null, u => u.MaCanBo == input.MaCanBo);
+                        WhereIf(input.MaCanBo!=null, u => u.MaCanBo == input.MaCanBo);
                 if (query != null)
                 {
                     var res = query.ToList();

@@ -8,7 +8,6 @@ namespace Project.Domain.Entity
     {
         [StringLength(50)]
         public string HoTen { get; set; }
-        [StringLength(10)]
         public string MaCanBo { get; set; }
         [StringLength(50)]
         public string? ChucVu { get; set; }
