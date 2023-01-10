@@ -70,7 +70,8 @@ namespace Project.Controllers
                     var loginResult = new LoginResultDto()
                     {
                         Token = token,
-                        UserName = account.UserName
+                        UserName = account.UserName,
+                        Role = account.Role,
                     };
                     return DataResult.ResultSucces(loginResult, "Dang nhap Thanh Cong!");
                 }
